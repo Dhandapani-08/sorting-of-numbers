@@ -22,15 +22,43 @@ To write and execute an Assembly Language Program for sorting data in Ascending 
 
 ## Program (Ascending order)
 
-```asm
+```
+ORG 0000H
+       MOV R7,30H     
+       DEC R7         
 
+LOOP1: MOV R0,#40H
+       MOV R6,30H
+       DEC R6
 
+LOOP:  MOV A,@R0
+       INC R0
+       MOV B,@R0
+       CJNE A,B,NEXT
+
+NEXT:  JC DOWN
+
+       MOV @R0,A
+       DEC R0
+       MOV @R0,B
+       INC R0
+
+DOWN:  DJNZ R6,LOOP
+       DJNZ R7,LOOP1
+
+HERE:  SJMP HERE
+
+END
 
 
 ```
 ## OUTPUT(Ascending order)
 
+<img width="831" height="563" alt="image" src="https://github.com/user-attachments/assets/21ac3cc1-50f6-478f-a2fd-105aeb0b3781" />
 
+**MEMORY WINDOW**
+
+<img width="673" height="205" alt="image" src="https://github.com/user-attachments/assets/49b5175a-1382-4be2-ba85-cd1bb0b1fdc2" />
 
 ---
 
@@ -48,15 +76,45 @@ To write and execute an Assembly Language Program for sorting data in Ascending 
 ---
 ## Program (Descending order)
 
-```asm
+```
+ORG 0000H
+       MOV R7,30H     ; Load number of elements
+       DEC R7         ; Outer loop = n-1
+	   
+LOOP1: MOV R0,#40H
+       MOV R6,30H
+       DEC R6
 
+LOOP:  MOV A,@R0
+       INC R0
+       MOV B,@R0
+       CJNE A,B,NEXT
 
+NEXT:  JNC DOWN       ; If A > B ? correct order ? skip
+       ; Swap when A < B
+       MOV @R0,A
+       DEC R0
+       MOV @R0,B
+       INC R0
 
+DOWN:  DJNZ R6,LOOP
+       DJNZ R7,LOOP1
 
+HERE:  SJMP HERE
+
+END
+ 
 ```
 ## OUTPUT(Descending order)
 
 
+<img width="940" height="558" alt="image" src="https://github.com/user-attachments/assets/f79fe0ae-d905-445e-a317-07dbffec0b0c" />
+
+
+**MEMORY WINDOW**
+
+
+<img width="676" height="161" alt="image" src="https://github.com/user-attachments/assets/75466a81-176f-43da-9154-6815d53dcccf" />
 
 ---
 ## RESULT:
